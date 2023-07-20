@@ -7,7 +7,7 @@ import com.niit.bej.userauthenticationservice.exception.UserNotFound;
 public interface UserService {
 
 
-    public User RegisterUser(User user) throws UserAlreadyExists;
+    public User registerUser(User user) throws UserAlreadyExists;
     public User loginUser(User user) throws UserNotFound, UserAlreadyExists;
 
 

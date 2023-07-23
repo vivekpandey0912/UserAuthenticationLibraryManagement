@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-
     private final UserRepository userRepository;
 
     @Autowired
@@ -19,33 +18,34 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(User user) throws UserAlreadyExists {
-         if(userRepository.findUserByEmailId(user.getEmailId()))
+         if(userRepository.findById(user.getEmailId()).isPresent())
         {
             throw new UserAlreadyExists("User Already Exists in the Database");
         }else
          {
+             user.setUserType("normal");
              return userRepository.save(user);
          }
     }
 
-    @Override
-    public User loginUser(User user) throws UserAlreadyExists {
-        User user1 = userRepository.findUserByEmailIdAndPasswordAndUserType(user.getEmailId(),user.getPassword(),user.getUserType());
-        if (user1 != null) {
-
-            if(user1.getUserType().equals("normal"))
-            {
-                System.out.println("Normal User = " + user1.getUserType());
-                return user1;
-            }
-            else if(user1.getUserType().equals("admin"))
-            {
-                System.out.println("Admin User = " + user1.getUserType());
-                return user1;
-            }
-        }
-            throw new UserAlreadyExists("User Already Exist");
-
-
-    }
+//    @Override
+//    public User loginUser(User user) throws UserAlreadyExists {
+//        User user1 = userRepository.findUserByEmailIdAndPasswordAndUserType(user.getEmailId(),user.getPassword(),user.getUserType());
+//        if (user1 != null) {
+//
+//            if(user1.getUserType().equals("normal"))
+//            {
+//                System.out.println("Normal User = " + user1.getUserType());
+//                return user1;
+//            }
+//            else if(user1.getUserType().equals("admin"))
+//            {
+//                System.out.println("Admin User = " + user1.getUserType());
+//                return user1;
+//            }
+//        }
+//            throw new UserAlreadyExists("User Already Exist");
+//
+//
+//    }
 }

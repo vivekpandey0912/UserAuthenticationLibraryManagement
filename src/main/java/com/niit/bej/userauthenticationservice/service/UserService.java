@@ -8,6 +8,7 @@ public interface UserService {
 
     public User registerUser(User user) throws UserAlreadyExists;
     public User loginUser(User user) throws UserNotFound;
+    public User loginUserAdmin(User user) throws UserNotFound;
 
 
 

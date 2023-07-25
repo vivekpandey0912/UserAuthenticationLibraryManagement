@@ -42,4 +42,17 @@ public class UserServiceImpl implements UserService {
         }
 
     }
+
+    @Override
+    public User loginUserAdmin(User user) throws UserNotFound {
+        User user1 = userRepository.findUserByEmailIdAndPasswordAndUserType(user.getEmailId(),user.getPassword(),"admin");
+        if (user1 != null) {
+            System.out.println("Normal User = " + user1.getUserType());
+            return user1;
+        }
+
+        else {
+            throw new UserNotFound("User Not Found");
+        }
+    }
 }

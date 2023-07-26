@@ -53,5 +53,18 @@ public class UserController {
 
 
     }
+    @PostMapping("/adminlogin")
+    public ResponseEntity<?> loginUserAdmin(@RequestBody User user) {
+        try {
+            User user1 = userService.loginUserAdmin(user);
+            Map<String, String> token = securityTokenGenerator.generateToken(user);
+            return new ResponseEntity<>(token, HttpStatus.OK);
+        } catch (UserNotFound e) {
+            return new ResponseEntity<>("User Not Found", HttpStatus.CONFLICT);
+        }
+
+
+    }
+
 
 }

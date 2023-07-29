@@ -60,7 +60,7 @@ public class UserController {
             Map<String, String> token = securityTokenGenerator.generateToken(user);
             return new ResponseEntity<>(token, HttpStatus.OK);
         } catch (UserNotFound e) {
-            return new ResponseEntity<>("User Not Found", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("User Not Found", HttpStatus.NOT_FOUND);
         }
 
 
